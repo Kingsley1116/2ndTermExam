@@ -37,18 +37,26 @@ while True:
 
     elif choice == 2:  # 如果用戶選擇修改密碼
         if loggedIn:  # 如果已經登入
-            oldPassword = input("請輸入舊密碼: ")
-            newPassword = input("請輸入新密碼: ")
-            confirmPassword = input("請再次輸入新密碼: ")
+            i = 0  # 設置計數器，用於計算輸入用戶名和密碼的次數
+            while i < 3:  # 設置while循環
+                if i < 3:
+                    oldPassword = input("請輸入舊密碼: ")
+                    newPassword = input("請輸入新密碼: ")
+                    confirmPassword = input("請再次輸入新密碼: ")
 
-            if oldPassword == defaultPassword:  # 如果輸入的舊密碼正確
-                if newPassword == confirmPassword:  # 如果輸入的新密碼和確認新密碼一致
-                    defaultPassword = newPassword  # 將默認密碼設置為新密碼
-                    print("密碼修改成功!")
+                    if oldPassword == defaultPassword:  # 如果輸入的舊密碼正確
+                        if newPassword == confirmPassword:  # 如果輸入的新密碼和確認新密碼一致
+                            defaultPassword = newPassword  # 將默認密碼設置為新密碼
+                            print("密碼修改成功!")
+                            break
+                        else:
+                            print(f"確認新密碼錯誤，剩下 {2 - i} 次機會!!")
+                            i = i + 1 # 輸入錯誤，計數器+1
+                    else:
+                        print(f"舊密碼錯誤，剩下 {2 - i} 次機會!!") # 如果輸入的舊密碼不正確，顯示錯誤訊息
+                        i = i + 1 # 輸入錯誤，計數器+1
                 else:
-                    print("確認新密碼錯誤!")
-            else:
-                print("舊密碼錯誤!") # 如果輸入的舊密碼不正確，顯示錯誤訊息
+                    print("3次機會已用盡!")  # 如果輸入錯誤的次數大於等於3，提示用戶已用盡機會
         else:
             print("請先登入!") # 如果未登入，提示用戶需要先登入
 
